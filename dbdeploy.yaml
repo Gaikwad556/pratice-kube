@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: mysql-vol
           awsElasticBlockStore:
-            volumeID: vol-0256e06fe3bc53a3d
+            volumeID: vol-0e0daad1003b00d35
             fsType: ext4
 
 
