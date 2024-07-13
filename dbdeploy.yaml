@@ -23,9 +23,6 @@ spec:
                 secretKeyRef:
                   name: mysecret
                   key: dbpass
-          volumeMounts:
-            - name: mysql-vol
-              mountPath: /var/lib/mysql
       
       nodeSelector:
         zone: us-east-2a
@@ -34,14 +31,7 @@ spec:
         - name: check-volume
           image: busybox
           command: ["sh", "-c", "rm -rf /var/lib/mysql/lost+found"] 
-          volumeMounts: 
-            - name: mysql-vol
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: mysql-vol
-          awsElasticBlockStore:
-            volumeID: vol-0e0daad1003b00d35
-            fsType: ext4
+          
 
 
 
