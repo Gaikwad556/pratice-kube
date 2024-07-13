@@ -27,7 +27,7 @@ spec:
           - name: mysql-vol
             mountPath: /var/lib/mysql
       
-      nodeselector:
+      nodeSelector:
         zone: us-east-2a
 
       init-contianer:
