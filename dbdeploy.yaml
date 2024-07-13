@@ -30,7 +30,7 @@ spec:
       nodeSelector:
         zone: us-east-2a
 
-      init-containers:
+      initcontainers:
         - name: check-volume
           image: busybox
           args: ["rm","-rf","/var/lib/mysql/lost+found"] 
