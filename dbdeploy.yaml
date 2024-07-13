@@ -12,31 +12,31 @@ spec:
         app: vprodb
     spec:
       containers:
-      - name: vprodb-container
-        image: ssgaikwad/vprofiledb
-        ports:
-          - name: vprodb-port
-            containerPort: 3306
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysecret
-                key: dbpass
-        volumeMounts:
-          - name: mysql-vol
-            mountPath: /var/lib/mysql
+        - name: vprodb-container
+          image: ssgaikwad/vprofiledb
+          ports:
+            - name: vprodb-port
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: dbpass
+          volumeMounts:
+            - name: mysql-vol
+              mountPath: /var/lib/mysql
       
       nodeSelector:
         zone: us-east-2a
 
-      init-contianer:
-      - name: check-volume
-        image: busybox
-        args: ["rm","-rf","/var/lib/mysql/lost+found"] 
-        volumeMounts: 
-          - name: mysql-vol
-            mountPath: /var/lib/mysql
+      init-containers:
+        - name: check-volume
+          image: busybox
+          args: ["rm","-rf","/var/lib/mysql/lost+found"] 
+          volumeMounts: 
+            - name: mysql-vol
+              mountPath: /var/lib/mysql
       volumes:
         - name: mysql-vol
           awsElasticBlockStore:
