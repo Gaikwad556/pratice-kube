@@ -23,22 +23,25 @@ spec:
               secretKeyRef:
                 name: mysecret
                 key: dbpass
-          - name: MYSQL_USER
-            value: root
         volumeMounts:
           - name: mysql-vol
             mountPath: /var/lib/mysql
+      
+      nodeselector:
+        zone: us-east-2a
 
+      init-contianer:
       - name: check-volume
         image: busybox
-        command: ["sh", "-c", "while true; do ls -l /etc/mysql-secrets; sleep 60; done"]
+        args: ["rm","-rf","/var/lib/mysql/lost+found"] 
         volumeMounts: 
           - name: mysql-vol
             mountPath: /var/lib/mysql
       volumes:
         - name: mysql-vol
-          secret:
-            secretName: mysecret
+          awsElasticBlockStore:
+            volumeID: vol-0c072011840d8ab48
+            fsType: ext4
 
 
 
