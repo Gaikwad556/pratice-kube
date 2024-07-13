@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: bot.infossg.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefic
+        backend:
+          service:
+            name: vproapp
+            port:
+              number: 80
