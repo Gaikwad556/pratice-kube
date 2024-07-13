@@ -33,7 +33,7 @@ spec:
       initContainers:
         - name: check-volume
           image: busybox
-          args: ["rm","-rf","/var/lib/mysql/lost+found"] 
+          command: ["sh", "-c", "rm -rf /var/lib/mysql/lost+found"] 
           volumeMounts: 
             - name: mysql-vol
               mountPath: /var/lib/mysql
