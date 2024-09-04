@@ -25,7 +25,7 @@ spec:
                   key: dbpass
       
       nodeSelector:
-        zone: us-east-2a
+        zone: us-west-1b
 
       initContainers:
         - name: check-volume
